@@ -45,10 +45,26 @@ public class MainRestController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id){
-
-
+    public String deleteEmployee(@PathVariable int id){
+        Employee employee = employeeService.findById(id);
+        employeeService.delete(employee);
         return "delete ok!";
+    }
+    
+    @GetMapping("/view/{id}")
+    public Employee viewEmployee(@PathVariable int id){
+        Employee employee = employeeService.findById(id);
+        return employee;
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editEmployee(@PathVariable int id){
+        return "edit ok!";
+    }
+
+    @GetMapping("/find/{empName}")
+    public String findEmployeeByEmpName(@PathVariable String empName){
+        return "find ok";
     }
 
 //    @PostMapping("/save")
