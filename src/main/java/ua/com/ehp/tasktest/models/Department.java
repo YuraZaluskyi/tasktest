@@ -5,30 +5,31 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-@ToString(exclude = {"department"})
+@ToString(exclude = {"employee"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Employee {
+public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String empName;
-    String empActive;
+    String dpName;
 
     @JsonIgnore
-    @ManyToOne(
+    @OneToMany(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    Department department;
+            fetch = FetchType.LAZY,
+            mappedBy = "department"
+    )
+    List<Employee> employees;
 
-    public Employee(String empName, String empActive) {
-        this.empName = empName;
-        this.empActive = empActive;
+    public Department(String dpName) {
+        this.dpName = dpName;
     }
 }
