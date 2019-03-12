@@ -23,7 +23,7 @@ public class Employee {
 
     @JsonIgnore
     @ManyToOne(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.DETACH,
             fetch = FetchType.LAZY)
     Department department;
 
